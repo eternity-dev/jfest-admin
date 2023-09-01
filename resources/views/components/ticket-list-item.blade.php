@@ -41,20 +41,6 @@
                             <span class="col-9">: {{ $ticket->uuid }}</span>
                         </div>
                         <div class="row">
-                            <span class="col-3">Order ID</span>
-                            <span class="col-9">: {{ $ticket->order->reference }}</span>
-                        </div>
-                        <div class="row">
-                            <span class="col-3">Order Status</span>
-                            <span class="col-9">: {{
-                                Illuminate\Support\Str::studly($ticket->order->status->value)
-                            }}</span>
-                        </div>
-                        <div class="row">
-                            <span class="col-3">Order Total Price</span>
-                            <span class="col-9">: Rp {{ $meta['formatted_order_amount'] }}</span>
-                        </div>
-                        <div class="row">
                             <span class="col-3">Activity</span>
                             <span class="col-9">: {{ $ticket->activity->name }}</span>
                         </div>
@@ -65,6 +51,27 @@
                         <div class="row">
                             <span class="col-3">User Name</span>
                             <span class="col-9">: {{ $ticket->user->name }}</span>
+                        </div>
+                    </div>
+                    <div class="row gap-2">
+                        <div class="col">
+                            <div class="row gap-2">
+                                <h6>Order Information</h6>
+                                <div class="row">
+                                    <span class="col-3">Order ID</span>
+                                    <span class="col-9">: {{ $ticket->order->reference }}</span>
+                                </div>
+                                <div class="row">
+                                    <span class="col-3">Order Status</span>
+                                    <span class="col-9">: {{
+                                        Illuminate\Support\Str::studly($ticket->order->status->value)
+                                    }}</span>
+                                </div>
+                                <div class="row">
+                                    <span class="col-3">Order Total</span>
+                                    <span class="col-9">: Rp {{ $meta['formatted_order_amount'] }}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row gap-2">

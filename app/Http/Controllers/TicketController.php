@@ -10,10 +10,10 @@ class TicketController extends Controller
     public function index(Request $request)
     {
         $tickets = Ticket::whereNot('code', null);
-        $tickets = $request->has('search')
+        $tickets = ($query = $request->query('search', false))
             ? $tickets
-                ->where('code', 'like', '%' . $request->query('search') . '%')
-                ->orWhereRelation('user', 'email', 'like', '%' . $request->query('search') . '%')
+                ->where('code', 'like', '%' . $query . '%')
+                ->orWhereRelation('user', 'email', 'like', '%' . $query . '%')
             : $tickets;
 
         return view('tickets.index', [
