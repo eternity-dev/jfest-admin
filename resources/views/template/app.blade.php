@@ -61,7 +61,7 @@
                                     <li><a class="dropdown-item" href="#">My Profile</a></li>
                                     <li><a class="dropdown-item" href="#">Change My Password</a></li>
                                     <li><h6 class="dropdown-header">Dangerous</h6></li>
-                                    <li><a class="dropdown-item text-danger" href="#">Sign Out</a></li>
+                                    <li><a class="dropdown-item text-danger" href="{{ $auth_url['revoke'] }}">Sign Out</a></li>
                                 </ul>
                             </div>
                         @endauth

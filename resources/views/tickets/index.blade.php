@@ -37,9 +37,7 @@
                     <x-ticket-list-item :ticket="$ticket" />
                 @endforeach
             </div>
-            @foreach ($data['tickets']->links() as $item)
-                {{ $item }}
-            @endforeach
+            {{ $data['tickets']->links() }}
         </main>
     </div>
 @endsection

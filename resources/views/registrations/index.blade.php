@@ -37,9 +37,7 @@
                     <x-registration-list-item :registration="$registration" />
                 @endforeach
             </div>
-            @foreach ($data['registrations']->links() as $item)
-                {{ $item }}
-            @endforeach
+            {{ $data['registrations']->links() }}
         </main>
     </div>
 @endsection

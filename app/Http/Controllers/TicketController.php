@@ -14,12 +14,13 @@ class TicketController extends Controller
             ? $tickets
                 ->where('code', 'like', '%' . $query . '%')
                 ->orWhereRelation('user', 'email', 'like', '%' . $query . '%')
+                ->orWhereRelation('user', 'name', 'like', '%' . $query . '%')
             : $tickets;
 
         return view('tickets.index', [
             'title' => 'Ticket',
             'data' => [
-                'tickets' => $tickets->paginate(25),
+                'tickets' => $tickets->paginate(1),
             ],
             ...$this->withLinks([]),
             ...$this->withMetadata([
