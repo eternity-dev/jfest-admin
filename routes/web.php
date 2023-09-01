@@ -1,5 +1,15 @@
 <?php
 
+use App\Models\Activity;
+use App\Models\ActivitySale;
+use App\Models\Competition;
+use App\Models\Order;
+use App\Models\Payment;
+use App\Models\Registration;
+use App\Models\Team;
+use App\Models\TeamMember;
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +24,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    dump(Activity::all());
+    dump(ActivitySale::all());
+    dump(Competition::all());
+    dump(Order::all());
+    dump(Payment::all());
+    dump(Registration::all());
+    dump(Team::all());
+    dump(TeamMember::all());
+    dump(Ticket::all());
+    dump(User::all());
 });
