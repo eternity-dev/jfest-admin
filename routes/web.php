@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,5 +31,9 @@ Route::name('organizer.')->prefix('org')->middleware('auth')->group(function () 
 
     Route::name('ticket.')->prefix('tickets')->group(function () {
         Route::get('/', [TicketController::class, 'index'])->name('index');
+    });
+
+    Route::name('registration.')->prefix('registrations')->group(function () {
+        Route::get('/', [RegistrationController::class, 'index'])->name('index');
     });
 });

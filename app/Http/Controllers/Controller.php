@@ -20,7 +20,8 @@ class Controller extends BaseController
             ],
             'navbar_url' => [
                 ['label' => 'Home', 'href' => route('organizer.home')],
-                ['label' => 'Ticket', 'href' => route('organizer.ticket.index')]
+                ['label' => 'Ticket', 'href' => route('organizer.ticket.index')],
+                ['label' => 'Registration', 'href' => route('organizer.registration.index')]
             ],
             ...$extendedLinks
         ];
