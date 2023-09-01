@@ -18,7 +18,7 @@ class LoginController extends Controller
         $currentStep = $request->query("state", "step-one");
 
         if ($currentStep == "step-one") {
-            return view('auth.login.step-one', [
+            return view('auth.login', [
                 ...$this->withLinks([]),
                 ...$this->withMetadata(['current_step' => $currentStep])
             ]);
@@ -31,7 +31,7 @@ class LoginController extends Controller
         try {
             $currentUser = Organizer::where('username', $username)->firstOrFail();
 
-            return view('auth.login.step-one', [
+            return view('auth.login', [
                 'current_user' => $currentUser,
                 ...$this->withLinks([]),
                 ...$this->withMetadata(['current_step' => $currentStep])
@@ -66,7 +66,7 @@ class LoginController extends Controller
                             ->withErrors(['password' => sprintf('Incorrect password for %s', $user->username)]);
                     }
 
-                    return redirect(RouteServiceProvider::HOME);
+                    return to_route(RouteServiceProvider::HOME);
                 } catch (ModelNotFoundException $_) { return to_route('auth.attempt.index', ['state' => 'step-one']); }
         }
     }
