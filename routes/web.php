@@ -1,15 +1,7 @@
 <?php
 
-use App\Models\Activity;
-use App\Models\ActivitySale;
-use App\Models\Competition;
-use App\Models\Order;
-use App\Models\Payment;
-use App\Models\Registration;
-use App\Models\Team;
-use App\Models\TeamMember;
-use App\Models\Ticket;
-use App\Models\User;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,15 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    dump(Activity::all());
-    dump(ActivitySale::all());
-    dump(Competition::all());
-    dump(Order::all());
-    dump(Payment::all());
-    dump(Registration::all());
-    dump(Team::all());
-    dump(TeamMember::all());
-    dump(Ticket::all());
-    dump(User::all());
+Route::name('auth.')->prefix('auth')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('/attempt', [LoginController::class, 'index'])->name('attempt.index');
+        Route::post('/attempt', [LoginController::class, 'store'])->name('attempt.store');
+    });
+
+    Route::get('/revoke', LogoutController::class)->middleware('auth')->name('revoke');
 });

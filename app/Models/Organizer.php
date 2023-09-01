@@ -2,10 +2,20 @@
 
 namespace App\Models;
 
+use App\Enums\OrganizerRoleEnum;
+use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Organizer extends Model
+class Organizer extends Authenticatable
 {
+    use Uuid;
+
+    protected $casts = [
+        'password' => 'hashed',
+        'role' => OrganizerRoleEnum::class
+    ];
+
     protected $fillable = [
         'name',
         'username',
@@ -14,4 +24,9 @@ class Organizer extends Model
     ];
 
     protected $guarded = ['id'];
+
+    protected $hidden = [
+        'id',
+        'password'
+    ];
 }
