@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -18,7 +19,8 @@ class Controller extends BaseController
                 'revoke' => route('auth.revoke')
             ],
             'navbar_url' => [
-                ['label' => 'Home', 'href' => '/']
+                ['label' => 'Home', 'href' => route('organizer.home')],
+                ['label' => 'Ticket', 'href' => route('organizer.ticket.index')]
             ],
             ...$extendedLinks
         ];
@@ -28,6 +30,13 @@ class Controller extends BaseController
     {
         return [
             ...$extendedMetadata
+        ];
+    }
+
+    protected function withUser(Request $request)
+    {
+        return [
+            'user' => $request->user()
         ];
     }
 }
