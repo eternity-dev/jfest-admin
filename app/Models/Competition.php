@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\EventTypeEnum;
 use App\Traits\Slug;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Competition extends Model
 {
@@ -47,5 +48,10 @@ class Competition extends Model
         static::retrieved(function (Model $model) {
             $model->setAttribute('type', EventTypeEnum::Competition->value);
         });
+    }
+
+    public function registrations(): HasMany
+    {
+        return $this->hasMany(Registration::class);
     }
 }

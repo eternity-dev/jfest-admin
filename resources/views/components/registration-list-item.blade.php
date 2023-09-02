@@ -121,7 +121,7 @@
                                         {{ $meta['date_of_updated'] }}
                                     </span>
                                 </div>
-                                @if (is_null($registration->team->members))
+                                @if (!isset($registration->team->members))
                                     <div class="row">
                                         <span class="col-6 text-muted">Email</span>
                                         <span class="col-6 d-flex justify-content-end">
@@ -142,7 +142,7 @@
                                     </div>
                                 @endif
                             </div>
-                            @if (!is_null($registration->team->members))
+                            @if (isset($registration->team->members))
                                 <div class="row gap-2">
                                     <h6>Team Information</h6>
                                     <div class="row">
@@ -178,19 +178,19 @@
                                                 <div class="row">
                                                     <span class="col-3 text-muted">Name</span>
                                                     <span class="col-9 text-muted">
-                                                        {{ $member->name }}
+                                                        : {{ $member->name }}
                                                     </span>
                                                 </div>
                                                 <div class="row">
                                                     <span class="col-3 text-muted">Email</span>
                                                     <span class="col-9 text-muted">
-                                                        {{ $member->instagram ?? '-' }}
+                                                        : {{ $member->instagram ?? '-' }}
                                                     </span>
                                                 </div>
                                                 <div class="row">
                                                     <span class="col-3 text-muted">Phone</span>
                                                     <span class="col-9 text-muted">
-                                                        {{ $member->nickname ?? '-' }}
+                                                        : {{ $member->nickname ?? '-' }}
                                                     </span>
                                                 </div>
                                             </li>

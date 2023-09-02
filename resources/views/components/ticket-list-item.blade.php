@@ -14,6 +14,12 @@
             </span>
         </div>
         <div class="d-flex gap-1">
+            @if (is_null($ticket->code))
+                <a href="{{ $url['update_url'] }}" class="btn btn-sm btn-success">
+                    <i class="ri-rfid-line pe-1"></i>
+                    <span>Generate ID</span>
+                </a>
+            @endif
             <a href="{{ $url['update_url'] }}" class="btn btn-sm btn-light">
                 <i class="ri-edit-line"></i>
             </a>

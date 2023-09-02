@@ -20,7 +20,7 @@ class TicketController extends Controller
         return view('tickets.index', [
             'title' => 'Ticket',
             'data' => [
-                'tickets' => $tickets->paginate(1),
+                'tickets' => $tickets->paginate(25),
             ],
             ...$this->withLinks([]),
             ...$this->withMetadata([
