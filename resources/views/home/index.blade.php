@@ -72,16 +72,32 @@
                     </div>
                 </div>
             </section>
-            <section class="card" style="height: fit-content">
-                <div class="card-body d-flex flex-column gap-2" style="height: fit-content">
-                    <span class="text-muted">Max Profits Per Hour</span>
-                    <canvas
-                        id="transaction-chart"
-                        style="width: 100%; height: 300px"
-                        data-payments="{{ $json_paid_payments }}"
-                        data-current-date="{{ now()->addDay() }}"></canvas>
+            <div class="row gap-1">
+                <div class="col">
+                    <section class="card" style="height: fit-content">
+                        <div class="card-body d-flex flex-column gap-2" style="height: fit-content">
+                            <span class="text-muted">Max Profits Per Hour</span>
+                            <canvas
+                                id="transaction-chart"
+                                style="width: 100%; height: 300px"
+                                data-payments="{{ $json_paid_payments }}"
+                                data-current-date="{{ now() }}"></canvas>
+                        </div>
+                    </section>
                 </div>
-            </section>
+                <div class="col">
+                    <section class="card" style="height: fit-content">
+                        <div class="card-body d-flex flex-column gap-2" style="height: fit-content">
+                            <span class="text-muted">Tickets Sold Per Hour</span>
+                            <canvas
+                                id="ticket-chart"
+                                style="width: 100%; height: 300px"
+                                data-tickets="{{ $json_paid_tickets }}"
+                                data-current-date="{{ now() }}"></canvas>
+                        </div>
+                    </section>
+                </div>
+            </div>
             <div class="row gap-1">
                 <div class="col">
                     <div class="card">
@@ -137,7 +153,7 @@
             for (let hour = 0; hour < 24; hour++) {
                 const currentHour = new Date(current);
                 currentHour.setHours(hour, 0, 0, 0);
-                yield `${currentHour.getHours()}`;
+                yield currentHour.getHours();
             }
         }
 
@@ -160,9 +176,7 @@
             const trxChart = new Chart(trxChartElem, {
                 type: 'line',
                 data: {
-                    labels: [...dateRangeFromHour(
-                        new Date(trxChartElem.dataset.currentDate),
-                    )],
+                    labels: [...dateRangeFromHour(trxChartElem.dataset.currentDate)],
                     datasets: [{
                         label: 'Per Hour Profits',
                         backgroundColor: '#ff000015',
@@ -170,10 +184,8 @@
                         fill: true,
                         tension: 0.25,
                         data: JSON.parse(trxChartElem.dataset.payments).map((payment) => {
-                            const date = new Date(payment.date);
-
                             return ({
-                                x: date.getHours(),
+                                x: payment.hour,
                                 y: payment.max_amount
                             })
                         })
@@ -188,6 +200,33 @@
                     }
                 }
             });
+
+            const ticketsChartElem = document.querySelector('#ticket-chart');
+            const ticketsChart = new Chart(ticketsChartElem, {
+                type: 'line',
+                data: {
+                    labels: [...dateRangeFromHour(ticketsChartElem.dataset.currentDate)],
+                    datasets: [{
+                        label: 'Tickets Per Hour',
+                        backgroundColor: '#0000ff15',
+                        borderColor: '#00f',
+                        fill: true,
+                        tension: 0.35,
+                        data: JSON.parse(ticketsChartElem.dataset.tickets).map((ticket) => {
+                            console.log(ticket)
+                            return ({
+                                x: ticket.hour,
+                                y: ticket.total_tickets
+                            })
+                        })
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { min: 0 }
+                    }
+                }
+            })
 
             const sumOfTrxChartElem = document.querySelector('#sum-of-transaction-chart');
             const sumOfTrxChart = new Chart(sumOfTrxChartElem, {

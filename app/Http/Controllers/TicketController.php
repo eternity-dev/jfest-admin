@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AttendStatusEnum;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 
@@ -28,5 +29,22 @@ class TicketController extends Controller
             ]),
             ...$this->withUser($request)
         ]);
+    }
+
+    public function edit(Request $request, Ticket $ticket)
+    {
+        if ($query = $request->query('state', false)) {
+            if ($query != 'mark-as-attended') return redirect()->back();
+
+            $ticket->attended_status = AttendStatusEnum::Attended;
+            $ticket->save();
+
+            return redirect()->back();
+        }
+    }
+
+    public function update()
+    {
+
     }
 }

@@ -31,7 +31,10 @@ class TicketListItem extends Component
         $this->url = [
             'update_url' => '/',
             'remove_url' => '/',
-            'mark_attended_url' => '/'
+            'mark_attended_url' => route('organizer.ticket.edit', [
+                'ticket' => $ticket,
+                'state' => 'mark-as-attended'
+            ])
         ];
     }
 

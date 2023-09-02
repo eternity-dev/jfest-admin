@@ -1,9 +1,13 @@
 <div class="card">
     <div
-        class="d-flex align-items-center justify-content-between p-2 ps-3"
-        data-bs-toggle="collapse"
-        data-bs-target="{{ sprintf('#%s', $ticket->code) }}">
+        class="d-flex align-items-center justify-content-between p-2">
         <div class="d-flex gap-3 align-items-center">
+            <button
+                class="btn btn-sm btn-light"
+                data-bs-toggle="collapse"
+                data-bs-target="{{ sprintf('#%s', $ticket->code) }}">
+                <i class="ri-arrow-down-s-line"></i>
+            </button>
             <strong>#{{ $ticket->code }}</strong>
             <span
                 class="badge {{ $ticket->attended_status == App\Enums\AttendStatusEnum::Attended
@@ -20,12 +24,6 @@
                     <span>Generate ID</span>
                 </a>
             @endif
-            <a href="{{ $url['update_url'] }}" class="btn btn-sm btn-light">
-                <i class="ri-edit-line"></i>
-            </a>
-            <a href="{{ $url['remove_url'] }}" class="btn btn-sm btn-danger">
-                <i class="ri-delete-bin-line"></i>
-            </a>
             @if ($ticket->attended_status == App\Enums\AttendStatusEnum::NotAttended)
                 <a href="{{ $url['mark_attended_url'] }}" class="btn btn-sm btn-primary">
                     <i class="ri-check-double-line pe-1"></i>
@@ -79,43 +77,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row gap-2">
-                        <h6>Payment Information</h6>
-                        @if (!is_null($ticket->order->payment))
-                            <div class="row">
-                                <span class="col-3">Trx Status</span>
-                                <span class="col-9">
-                                    <span>: </span>
-                                    {{ Illuminate\Support\Str::studly($ticket->order->payment->status->value) }}
-                                </span>
-                            </div>
-                            <div class="row">
-                                <span class="col-3">Trx ID</span>
-                                <span class="col-9">: {{ $ticket->order->payment->transaction_id }}</span>
-                            </div>
-                            <div class="row">
-                                <span class="col-3">Trx Link</span>
-                                <span class="col-9">
-                                    <span>: </span>
-                                    <a href={{ $ticket->order->payment->link }}>Go to payment link</a>
-                                </span>
-                            </div>
-                            <div class="row">
-                                <span class="col-3">Amount</span>
-                                <span class="col-9">: Rp {{ $meta['formatted_payment_amount'] }}</span>
-                            </div>
-                            <div class="row">
-                                <span class="col-3">Fee</span>
-                                <span class="col-9">: Rp {{ $meta['formatted_payment_fee'] }}</span>
-                            </div>
-                            <div class="row">
-                                <span class="col-3">Payment Method</span>
-                                <span class="col-9">: {{ $ticket->order->payment->method }}</span>
-                            </div>
-                        @else
-                            <span>Ticket not paid</span>
-                        @endif
                     </div>
                 </div>
                 {{-- additional information --}}

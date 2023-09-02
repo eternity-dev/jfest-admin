@@ -22,7 +22,7 @@ class HomeController extends Controller
         $totalRegistrations = Registration::whereNot('uuid', null)->count();
 
         $paidPayments = json_encode(Payment::select([
-            DB::raw('HOUR(updated_at) as date'),
+            DB::raw('HOUR(created_at) as hour'),
             DB::raw('MAX(amount) as max_amount'),
         ])
             ->whereNot('transaction_id', null)
@@ -30,8 +30,8 @@ class HomeController extends Controller
                 $query->where('status', PaymentStatusEnum::Success->value);
                 $query->orWhere('status', PaymentStatusEnum::Challenge->value);
             })
-            ->whereDate('updated_at', now())
-            ->groupBy('date')
+            ->whereDate('created_at', now())
+            ->groupBy('hour')
             ->get());
 
         $sumOfPaidPayments = json_encode(Payment::select([
@@ -61,11 +61,21 @@ class HomeController extends Controller
             ->get());
 
         $registrationsCountByComp = json_encode(Competition::withCount('registrations')->get());
+        $ticketsCountPerHour = json_encode(Ticket::select(
+            DB::raw('HOUR(created_at) AS hour'),
+            DB::raw('COUNT(id) AS total_tickets')
+        )
+            ->whereNot('code', null)
+            ->whereNot('price', '0')
+            ->whereDate('created_at', now())
+            ->groupBy('hour')
+            ->get());
 
         return view('home.index', [
             ...$this->withLinks([]),
             ...$this->withMetadata([
                 'json_paid_payments' => $paidPayments,
+                'json_paid_tickets' => $ticketsCountPerHour,
                 'json_sum_of_paid_payments' => $sumOfPaidPayments,
                 'json_payment_methods' => $paymentMethods,
                 'json_registrations_count_by_comp' => $registrationsCountByComp,
