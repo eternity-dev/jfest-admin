@@ -3,9 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>
-            {{ sprintf("%s - %s", env("APP_NAME"), isset($title) ? $title : "Home") }}
-        </title>
+        <title>{{ sprintf("%s - %s", env("APP_NAME"), isset($title) ? $title : "Home") }}</title>
 
         @yield("styles")
         <link

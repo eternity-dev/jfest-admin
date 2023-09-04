@@ -19,10 +19,10 @@ class Controller extends BaseController
                 'revoke' => route('auth.revoke')
             ],
             'navbar_url' => [
-                ['label' => 'Home', 'href' => route('organizer.home')],
-                ['label' => 'Order', 'href' => route('organizer.order.index')],
-                ['label' => 'Ticket', 'href' => route('organizer.ticket.index')],
-                ['label' => 'Registration', 'href' => route('organizer.registration.index')]
+                ['label' => 'Home', 'href' => '/'],
+                ['label' => 'Order', 'href' => '/'],
+                ['label' => 'Ticket', 'href' => '/'],
+                ['label' => 'Registration', 'href' => '/']
             ],
             ...$extendedLinks
         ];
@@ -31,7 +31,9 @@ class Controller extends BaseController
     protected function withMetadata($extendedMetadata = [])
     {
         return [
-            ...$extendedMetadata
+            'meta' => [
+                ...$extendedMetadata
+            ]
         ];
     }
 
