@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\PaymentStatusEnum;
 use App\Traits\Uuid;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,5 +34,15 @@ class Payment extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function scopeWhereSuccess(Builder $query): void
+    {
+        $query->where('status', PaymentStatusEnum::Success);
+    }
+
+    public function scopeWherePending(Builder $query): void
+    {
+        $query->where('status', PaymentStatusEnum::Pending);
     }
 }

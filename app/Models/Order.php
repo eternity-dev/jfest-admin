@@ -6,7 +6,6 @@ use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class Order extends Model
@@ -28,6 +27,26 @@ class Order extends Model
     protected static function boot(): void
     {
         parent::boot();
+
+        static::retrieved(function (Model $model) {
+            if ($model->getAttribute('payment') === null) {
+                if (!is_null($payment = $model->payments()->whereSuccess()->first())) {
+                    return $model->setAttribute('payment', $payment);
+                } else if (!is_null($payment = $model
+                    ->payments()
+                    ->wherePending()
+                    ->orderBy('created_at', 'desc')
+                    ->first()
+                )) { return $model->setAttribute('payment', $payment); } else {
+                    $model->setAttribute(
+                        'payment',
+                        $model->payments()->one()->latestOfMany()->first()
+                    );
+                }
+
+            }
+        });
+
         static::creating(function (Model $model) {
             if ($model->getAttribute('reference') === null) {
                 $userId = $model->getAttribute('user_id');
@@ -47,9 +66,9 @@ class Order extends Model
         });
     }
 
-    public function payment(): HasOne
+    public function payments(): HasMany
     {
-        return $this->hasOne(Payment::class)->latestOfMany();
+        return $this->hasMany(Payment::class);
     }
 
     public function registrations(): HasMany
