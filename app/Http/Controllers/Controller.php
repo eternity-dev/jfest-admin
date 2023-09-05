@@ -19,7 +19,7 @@ class Controller extends BaseController
                 'revoke' => route('auth.revoke')
             ],
             'navbar_url' => [
-                ['label' => 'Home', 'href' => '/'],
+                ['label' => 'Overview', 'href' => route('dashboard.home.index')],
                 ['label' => 'Order', 'href' => '/'],
                 ['label' => 'Ticket', 'href' => '/'],
                 ['label' => 'Registration', 'href' => '/']

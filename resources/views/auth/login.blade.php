@@ -11,10 +11,10 @@
                 </span>
             </header>
             <form
-                action="{{ route("auth.attempt.store", ['state' => $current_step]) }}"
+                action="{{ route("auth.attempt.store", ['state' => $meta['current_step']]) }}"
                 method="POST">
                 @csrf
-                @if ($current_step == 'step-one')
+                @if ($meta['current_step'] == 'step-one')
                     <div class="mb-3">
                         <div class="form-floating">
                             <input
@@ -30,7 +30,7 @@
                         </div>
                         @error('username') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
-                @elseif ($current_step == 'step-two')
+                @elseif ($meta['current_step'] == 'step-two')
                     <div class="d-flex flex-column gap-3 mb-3">
                         <div class="card">
                             <div class="card-body">
@@ -58,7 +58,7 @@
                 @endif
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary mt-2 btn-block">
-                        {{ $current_step == 'step-one' ? 'Continue' : 'Sign In' }}
+                        {{ $meta['current_step'] == 'step-one' ? 'Continue' : 'Sign In' }}
                     </button>
                 </div>
             </form>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +23,10 @@ Route::name('auth.')->prefix('auth')->group(function () {
     });
 
     Route::get('/revoke', LogoutController::class)->middleware('auth')->name('revoke');
+});
+
+Route::name('dashboard.')->prefix('d')->middleware('auth')->group(function () {
+    Route::name('home.')->prefix('home')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('index');
+    });
 });

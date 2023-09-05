@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\AttendStatusEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -44,5 +45,11 @@ class Ticket extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'uuid');
+    }
+
+    public function scopeWhereNotFreePass(Builder $query)
+    {
+        $query->whereNot('code', null);
+        $query->whereNot('price', 0);
     }
 }

@@ -17,10 +17,14 @@
     </head>
     <body>
         <div id="app">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <nav class="navbar navbar-expand-lg">
                 <div class="container">
-                    <a href="{{ route('organizer.home') }}" class="navbar-brand">
-                        {{ env('APP_NAME') }} - {{ isset($title) ? $title : 'Home' }}
+                    <a href="{{ route('dashboard.home.index') }}" class="navbar-brand">
+                        <img
+                            src="https://bucket.jfestbali.com/images/logo.png"
+                            alt="JFest logo"
+                            width="40"
+                            height="40">
                     </a>
                     <button
                         class="navbar-toggler"
@@ -33,12 +37,15 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbar-main">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul class="navbar-nav ms-2 me-auto mb-2 mb-lg-0">
                             @foreach ($navbar_url as $item)
                                 <li class="nav-item">
                                     <a
                                         href="{{ $item['href'] }}"
-                                        class="nav-link {{ request()->url() == $item['href'] ? 'active' : null }}">
+                                        class="nav-link {{ request()->url() == $item['href']
+                                            ? 'active'
+                                            : null
+                                        }}">
                                         {{ $item['label'] }}
                                     </a>
                                 </li>
@@ -66,7 +73,7 @@
                     </div>
                 </div>
             </nav>
-            @yield("content")
+            <div class="container d-flex flex-column gap-4 pt-4 pb-5">@yield("content")</div>
         </div>
 
         <script
