@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,5 +29,10 @@ Route::name('auth.')->prefix('auth')->group(function () {
 Route::name('dashboard.')->prefix('d')->middleware('auth')->group(function () {
     Route::name('home.')->prefix('home')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('index');
+    });
+
+    Route::name('orders.')->prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::put('/{order}', [OrderController::class, 'update'])->name('update');
     });
 });
