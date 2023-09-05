@@ -8,7 +8,7 @@
             </span>
         </section>
         <section class="d-flex align-items-end gap-2">
-            <button class="btn btn-light" id="refresh-button">
+            <button class="btn btn-dark" id="refresh-button">
                 <i class="ri-refresh-line pe-1"></i>
                 <span>Refresh</span>
             </button>
@@ -30,10 +30,14 @@
                         aria-label="Search"
                         aria-describedby="label-search">
                 </div>
+                <button type="submit" class="btn btn-primary d-flex align-items-center gap-1">
+                    <i class="ri-search-line pe-1"></i>
+                    <span>Search</span>
+                </button>
                 <div class="dropdown">
                     <button
                         type="button"
-                        class="btn btn-light dropdown-toggle d-flex align-items-center gap-1"
+                        class="btn btn-dark dropdown-toggle d-flex align-items-center gap-1"
                         data-bs-toggle="dropdown">
                         <i class="ri-filter-line pe-1"></i>
                         <span>Filter</span>
@@ -56,10 +60,6 @@
                         </a></li>
                     </ul>
                 </div>
-                <button type="submit" class="btn btn-primary d-flex align-items-center gap-1">
-                    <i class="ri-search-line pe-1"></i>
-                    <span>Search</span>
-                </button>
             </form>
             <div class="{{ $data['orders']->isEmpty() ? 'border-0' : 'border-top' }}">
                 @forelse ($data['orders'] as $order)
@@ -99,7 +99,7 @@
                         <div class="col-2 d-flex align-items-center justify-content-end gap-1">
                             <div class="dropdown dropstart">
                                 <button
-                                    class="btn btn-sm btn-light"
+                                    class="btn btn-sm btn-dark"
                                     type="button"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
@@ -111,15 +111,19 @@
                                         $order->status != App\Enums\OrderStatusEnum::Expired
                                     )
                                         <li>
-                                            <a
-                                                href="{{ route('dashboard.orders.update', [
-                                                    'order' => $order,
-                                                    'state' => 'mark-as-paid'
-                                                ]) }}"
-                                                class="dropdown-item d-flex align-items-center gap-2">
-                                                <i class="ri-check-double-line pt-1 pe-1 text-primary"></i>
-                                                <span>Mark as paid</span>
-                                            </a>
+                                            <form action="{{ route('dashboard.orders.update', [
+                                                'order' => $order,
+                                                'state' => 'mark-as-paid'
+                                            ]) }}" method="post">
+                                                @csrf
+                                                @method('put')
+                                                <button
+                                                    type="submit"
+                                                    class="dropdown-item d-flex align-items-center gap-2">
+                                                    <i class="ri-check-double-line pt-1 pe-1 text-primary"></i>
+                                                    <span>Mark as paid</span>
+                                                </button>
+                                            </form>
                                         </li>
                                         <li><hr class="dropdown-divider"></li>
                                     @endif

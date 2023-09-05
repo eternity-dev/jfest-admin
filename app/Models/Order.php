@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 
 class Order extends Model
 {
+    public Payment|null $payment;
+
     protected $casts = [
         'expired_at' => 'date:Y-m-d',
         'status' => OrderStatusEnum::class,
@@ -31,19 +33,14 @@ class Order extends Model
         static::retrieved(function (Model $model) {
             if ($model->getAttribute('payment') === null) {
                 if (!is_null($payment = $model->payments()->whereSuccess()->first())) {
-                    return $model->setAttribute('payment', $payment);
+                    $model->payment = $payment; return;
                 } else if (!is_null($payment = $model
                     ->payments()
                     ->wherePending()
                     ->orderBy('created_at', 'desc')
                     ->first()
-                )) { return $model->setAttribute('payment', $payment); } else {
-                    $model->setAttribute(
-                        'payment',
-                        $model->payments()->one()->latestOfMany()->first()
-                    );
-                }
-
+                )) { $model->payment = $payment; return; }
+                else { $model->payment = $payment; return; }
             }
         });
 

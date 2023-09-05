@@ -15,6 +15,11 @@ import {
 } from "chart.js";
 import "chartjs-adapter-date-fns";
 
+const toastElemList = document.querySelectorAll(".toast");
+const toastList = [...toastElemList].map((el) => {
+    new bootstrap.Toast(el, {}).show();
+});
+
 const COLORS = {
     primary: "#36A2EB",
     danger: "#FF6384",

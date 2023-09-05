@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,6 +75,28 @@
             </nav>
             <div class="container d-flex flex-column gap-4 pt-4 pb-5">@yield("content")</div>
         </div>
+        @if (Illuminate\Support\Facades\Session::has('message'))
+            <div class="toast-container position-fixed top-0 end-0 m-3">
+                <div
+                    class="toast"
+                    role="alert"
+                    aria-live="polite"
+                    aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">System</strong>
+                        <small class="text-body-secondary">just now</small>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="toast"
+                            aria-label="close"></button>
+                    </div>
+                    <div class="toast-body">
+                        {{ Illuminate\Support\Facades\Session::get('message') }}
+                    </div>
+                </div>
+            </div>
+        @endif
 
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
