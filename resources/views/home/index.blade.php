@@ -8,7 +8,7 @@
             </span>
         </section>
         <section class="d-flex align-items-end gap-2">
-            <button class="btn btn-light" id="refresh-button">
+            <button class="btn btn-dark" id="refresh-button">
                 <i class="ri-refresh-line pe-1"></i>
                 <span>Refresh</span>
             </button>
