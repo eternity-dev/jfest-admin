@@ -110,6 +110,14 @@
             const toastList = [...toastElemList].map((el) => {
                 new bootstrap.Toast(el, {}).show();
             });
+
+            const refreshButton = document.getElementById("refresh-button");
+
+            if (document.body.contains(refreshButton)) {
+                refreshButton.addEventListener("click", () => {
+                    window.location.reload();
+                });
+            }
         </script>
         @yield("scripts")
     </body>

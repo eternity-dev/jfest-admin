@@ -261,11 +261,3 @@ if (
         },
     });
 }
-
-const refreshButton = document.getElementById("refresh-button");
-
-if (document.body.contains(refreshButton)) {
-    refreshButton.addEventListener("click", () => {
-        window.location.reload();
-    });
-}
