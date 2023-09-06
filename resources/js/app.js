@@ -221,7 +221,7 @@ if (
         },
         options: {
             indexAxis: "y",
-            scales: { y: { position: "left" } },
+            scales: { y: { position: "right", ticks: { stepSize: 1 } } },
         },
     });
 
