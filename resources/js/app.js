@@ -42,17 +42,7 @@ const paymentsMChartElem = document.getElementById("chart-payments");
 const regisChartElem = document.getElementById("chart-registrations");
 const usersChartElem = document.getElementById("chart-users");
 
-if (
-    [
-        ticketsSoldChartElem,
-        totalRevenueChartElem,
-        paymentsMChartElem,
-        regisChartElem,
-        usersChartElem,
-    ].every((elem) => {
-        return document.body.contains(elem);
-    })
-) {
+if (document.body.contains(ticketsSoldChartElem)) {
     const ticketsSoldData = JSON.parse(ticketsSoldChartElem.dataset.tickets);
     const ticketsSoldChart = new Chart(ticketsSoldChartElem, {
         type: "line",
@@ -99,7 +89,9 @@ if (
             },
         },
     });
+}
 
+if (document.body.contains(totalRevenueChartElem)) {
     const totalRevenueData = JSON.parse(totalRevenueChartElem.dataset.revenue);
     const totalRevenueChart = new Chart(totalRevenueChartElem, {
         type: "line",
@@ -159,7 +151,9 @@ if (
             },
         },
     });
+}
 
+if (document.body.contains(paymentsMChartElem)) {
     const paymentsMethodChartData = JSON.parse(
         paymentsMChartElem.dataset.payments
     );
@@ -192,7 +186,9 @@ if (
             },
         },
     });
+}
 
+if (document.body.contains(regisChartElem)) {
     const regisChartData = JSON.parse(regisChartElem.dataset.registrations);
     const regisChart = new Chart(regisChartElem, {
         type: "bar",
@@ -224,7 +220,9 @@ if (
             scales: { y: { position: "right", ticks: { stepSize: 1 } } },
         },
     });
+}
 
+if (document.body.contains(usersChartElem)) {
     const usersChartData = JSON.parse(usersChartElem.dataset.users);
     const usersChart = new Chart(usersChartElem, {
         type: "line",
