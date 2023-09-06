@@ -105,6 +105,11 @@
         <script>
             const tooltipTriggerList = document.querySelector('[data-bs-toggle="tooltip"]');
             tooltipTriggerList && [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+
+            const toastElemList = document.querySelectorAll(".toast");
+            const toastList = [...toastElemList].map((el) => {
+                new bootstrap.Toast(el, {}).show();
+            });
         </script>
         @yield("scripts")
     </body>
