@@ -72,7 +72,7 @@
                                 height="35"
                                 class="img-fluid rounded-circle">
                         </div>
-                        <div class="col-5 d-flex flex-column">
+                        <div class="col-4 d-flex flex-column">
                             <span class="m-0">{{ $order->reference }}</span>
                             <small class="text-muted">{{ $order->user->email }}</small>
                         </div>
@@ -96,7 +96,15 @@
                             <span>{{ str($order->status->value)->title() }}</span>
                             <small class="text-muted">Status</small>
                         </div>
-                        <div class="col-2 d-flex align-items-center justify-content-end gap-1">
+                        <div class="col-2 d-flex flex-column">
+                            @if (!is_null($order->payment) || isset($order->payment))
+                                <span>{{ str($order->payment->status->value)->title() }}</span>
+                            @else
+                                <span>-</span>
+                            @endif
+                            <small class="text-muted">Trx Status</small>
+                        </div>
+                        <div class="col-1 d-flex align-items-center justify-content-end gap-1">
                             <div class="dropdown dropstart">
                                 <button
                                     class="btn btn-sm btn-dark"
@@ -120,19 +128,27 @@
                                                 <button
                                                     type="submit"
                                                     class="dropdown-item d-flex align-items-center gap-2">
-                                                    <i class="ri-check-double-line pt-1 pe-1 text-primary"></i>
-                                                    <span>Mark as paid</span>
+                                                    Mark As Paid
                                                 </button>
                                             </form>
                                         </li>
-                                        <li><hr class="dropdown-divider"></li>
                                     @endif
-                                    <li class="dropdown-header">Details</li>
-                                    <li><a href="" class="dropdown-item">View tickets</a></li>
-                                    <li><a href="" class="dropdown-item">View registrations</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li class="dropdown-header">Actions</li>
-                                    <li><a href="" class="dropdown-item">Update</a></li>
+                                    <li class="dropdown-header">Details</li>
+                                    <li>
+                                        <a
+                                            href=""
+                                            class="dropdown-item d-flex align-items-center gap-2">
+                                            Show Details
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href=""
+                                            class="dropdown-item d-flex align-items-center gap-2">
+                                            Show User Details
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
