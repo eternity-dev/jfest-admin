@@ -300,7 +300,10 @@
                         @endif
                         <div class="col-4">
                             <a
-                                href=""
+                                href="{{ route('dashboard.tickets.create', [
+                                    'order' => $data['order']->id,
+                                    'user' => $data['order']->user->id
+                                ]) }}"
                                 class="btn btn-primary">
                                 <i class="ri-coupon-line pe-1"></i>
                                 <span>Create Ticket</span>
