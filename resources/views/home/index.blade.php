@@ -12,7 +12,7 @@
                 <i class="ri-refresh-line pe-1"></i>
                 <span>Refresh</span>
             </button>
-            <a href="" class="btn btn-primary">
+            <a href="{{ route('dashboard.tickets.create') }}" class="btn btn-primary">
                 <i class="ri-coupon-line pe-1"></i>
                 <span>Create Ticket</span>
             </a>
