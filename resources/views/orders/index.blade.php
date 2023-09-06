@@ -132,12 +132,12 @@
                                                 </button>
                                             </form>
                                         </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li class="dropdown-header">Details</li>
                                     @endif
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li class="dropdown-header">Details</li>
                                     <li>
                                         <a
-                                            href=""
+                                            href="{{ route('dashboard.orders.show', ['order' => $order]) }}"
                                             class="dropdown-item d-flex align-items-center gap-2">
                                             Show Details
                                         </a>

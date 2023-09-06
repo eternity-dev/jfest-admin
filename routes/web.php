@@ -33,6 +33,7 @@ Route::name('dashboard.')->prefix('d')->middleware('auth')->group(function () {
 
     Route::name('orders.')->prefix('orders')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('/{order}', [OrderController::class, 'show'])->name('show');
         Route::put('/{order}', [OrderController::class, 'update'])->name('update');
     });
 });

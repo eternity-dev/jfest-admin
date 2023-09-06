@@ -36,6 +36,18 @@ class OrderController extends Controller
         ]);
     }
 
+    public function show(Request $request, Order $order)
+    {
+        return view('orders.show', [
+            'data' => [
+                'order' => $order
+            ],
+            ...$this->withLinks([]),
+            ...$this->withMetadata([]),
+            ...$this->withUser($request)
+        ]);
+    }
+
     public function update(Request $request, Order $order)
     {
         if (!is_null($query = $request->query('state', null))) {
@@ -48,9 +60,20 @@ class OrderController extends Controller
                     break;
             }
 
-            return to_route('dashboard.orders.index');
+            return redirect()->back();
         }
 
-        return to_route('dashboard.orders.index');
+        $data = $request->all();
+
+        foreach ($data['order'] as $key => $updatedOrder) {
+            $order->{$key} = $updatedOrder;
+        }
+
+        if ($order->isDirty()) {
+            $order->save();
+            $request->session()->flash('message', 'Order has been updated');
+        }
+
+        return redirect()->back();
     }
 }
