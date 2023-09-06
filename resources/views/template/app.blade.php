@@ -59,7 +59,7 @@
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    {{ $user->username }}@jfestbali.com
+                                    {{ $auth->username }}@jfestbali.com
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><h6 class="dropdown-header">Account</h6></li>

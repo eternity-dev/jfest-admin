@@ -4,7 +4,7 @@
         <section class="d-block">
             <h4 class="m-0 mb-1">Overview</h4>
             <span class="text-muted">
-                Hello there {{ $user->name }}! Comes and check what happen while you&lsquo;re away
+                Hello there {{ $auth->name }}! Comes and check what happen while you&lsquo;re away
             </span>
         </section>
         <section class="d-flex align-items-end gap-2">

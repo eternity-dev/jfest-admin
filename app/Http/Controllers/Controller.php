@@ -39,7 +39,7 @@ class Controller extends BaseController
     protected function withUser(Request $request)
     {
         return [
-            'user' => $request->user()
+            'auth' => $request->user()
         ];
     }
 }

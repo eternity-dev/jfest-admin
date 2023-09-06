@@ -4,7 +4,7 @@
         <section class="d-block">
             <h4 class="m-0 mb-1">Orders</h4>
             <span class="text-muted">
-                Hello there {{ $user->name }}! It looks like you have so many new orders had been placed
+                Hello there {{ $auth->name }}! It looks like you have so many new orders had been placed
             </span>
         </section>
         <section class="d-flex align-items-end gap-2">

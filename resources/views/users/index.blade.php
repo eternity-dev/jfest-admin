@@ -4,7 +4,7 @@
         <section class="d-block">
             <h4 class="m-0 mb-1">Users</h4>
             <span class="text-muted">
-                Hello there {{ $user->name }}! Here are the list of all the users registered
+                Hello there {{ $auth->name }}! Here are the list of all the users registered
             </span>
         </section>
         <section class="d-flex align-items-end gap-2">

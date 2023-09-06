@@ -5,7 +5,7 @@
 
             <h4 class="m-0 mb-1">Order #{{ $data['order']->reference }}</h4>
             <span class="text-muted">
-                Hello there {{ $user->name }}! Here are some information for order made by
+                Hello there {{ $auth->name }}! Here are some information for order made by
                 {{ $data['order']->user->name }}
             </span>
         </section>
