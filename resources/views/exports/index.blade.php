@@ -75,7 +75,8 @@
                             type="checkbox"
                             class="form-check-input"
                             name="include_instagram"
-                            id="include-instagram">
+                            id="include-instagram"
+                            checked>
                         <label for="include-instagram" class="form-check-label">Include instagram field</label>
                     </div>
                     <div class="form-check">
@@ -83,7 +84,8 @@
                             type="checkbox"
                             class="form-check-input"
                             name="include_nickname"
-                            id="include-nickname">
+                            id="include-nickname"
+                            checked>
                         <label for="include-nickname" class="form-check-label">Include nickname field</label>
                     </div>
                     @error ('include_email') <small class="text-danger">{{ $message }}</small> @enderror
