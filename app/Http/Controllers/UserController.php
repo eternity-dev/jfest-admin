@@ -16,7 +16,6 @@ class UserController extends Controller
         if (!is_null($query = $request->query('search', null))) {
             $users = User::where('email', 'like', '%' . $query . '%')
                 ->orWhere('name', 'like', '%' . $query . '%')
-                ->orWhere('phone', 'like', '%' . $query . '%')
                 ->paginate(25);
         }
 
