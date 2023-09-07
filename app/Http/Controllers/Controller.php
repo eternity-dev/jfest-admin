@@ -21,7 +21,8 @@ class Controller extends BaseController
             'navbar_url' => [
                 ['label' => 'Overview', 'href' => route('dashboard.home.index')],
                 ['label' => 'Order', 'href' => route('dashboard.orders.index')],
-                ['label' => 'User', 'href' => route('dashboard.users.index')]
+                ['label' => 'User', 'href' => route('dashboard.users.index')],
+                ['label' => 'Export', 'href' => route('dashboard.exports.index')]
             ],
             ...$extendedLinks
         ];

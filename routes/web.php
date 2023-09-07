@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TicketController;
@@ -31,6 +32,11 @@ Route::name('auth.')->prefix('auth')->group(function () {
 Route::name('dashboard.')->prefix('d')->middleware('auth')->group(function () {
     Route::name('home.')->prefix('home')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('index');
+    });
+
+    Route::name('exports.')->prefix('exports')->group(function () {
+        Route::get('/', [ExportController::class, 'index'])->name('index');
+        Route::post('/registrations', [ExportController::class, 'storeRegistrations'])->name('store.registrations');
     });
 
     Route::name('orders.')->prefix('orders')->group(function () {
