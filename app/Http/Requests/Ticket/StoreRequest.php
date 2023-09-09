@@ -18,9 +18,9 @@ class StoreRequest extends FormRequest
         return [
             'activity' => ['exists:activities,name'],
             'uuid' => ['uuid'],
-            'price' => ['exists:activity_sales,id'],
             'user' => ['exists:users,uuid'],
-            'reference' => ['exists:orders,id']
+            'price' => ['exists:activity_sales,id'],
+            'amount' => ['required', 'numeric'],
         ];
     }
 }

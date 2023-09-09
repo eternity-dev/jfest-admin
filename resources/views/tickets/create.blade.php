@@ -15,12 +15,14 @@
                 <div class="row mb-3">
                     <label for="activity" class="col-4 col-form-label">Activity Name</label>
                     <div class="col">
-                        <input
-                            type="text"
-                            class="form-control"
+                        <select
+                            class="form-select"
                             id="activity"
-                            name="activity"
-                            value="{{ $data['activity']->name }}">
+                            name="activity">
+                            @foreach ($data['activities'] as $activity)
+                                <option value="{{ $activity->name }}">{{ $activity->name }}</option>
+                            @endforeach
+                        </select>
                         @error ('activity') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                 </div>
@@ -33,6 +35,31 @@
                             id="uuid"
                             name="uuid"
                             value="{{ str()->uuid() }}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="user" class="col-4 col-form-label">User UUID</label>
+                    <div class="col d-flex flex-column gap-1">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="user"
+                            name="user"
+                            placeholder="Type the email..."
+                            list="users-list"
+                            value="{{
+                                !is_null($data['user'])
+                                    ? $data['user']->uuid
+                                    : ''
+                            }}">
+                        <datalist id="users-list">
+                            @foreach ($data['users'] as $user)
+                                <option value="{{ $user->uuid }}">
+                                    {{ $user->email }}
+                                </option>
+                            @endforeach
+                        </datalist>
+                        @error ('user') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -54,51 +81,16 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="user" class="col-4 col-form-label">User ID</label>
-                    <div class="col d-flex flex-column gap-1">
+                    <label for="amount" class="col-4 col-form-label">Amount of Tickets</label>
+                    <div class="col">
                         <input
-                            type="text"
-                            class="form-control w-50"
-                            id="user"
-                            name="user"
-                            placeholder="Type the email..."
-                            list="users-list"
-                            value="{{
-                                !is_null($data['user'])
-                                    ? $data['user']->uuid
-                                    : ''
-                            }}">
-                        <datalist id="users-list">
-                            @foreach ($data['users'] as $user)
-                                <option value="{{ $user->uuid }}">
-                                    {{ $user->email }}
-                                </option>
-                            @endforeach
-                        </datalist>
-                        @error ('user') <small class="text-danger">{{ $message }}</small> @enderror
-                        <span class="form-text">Choose the user who has the ticket</span>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="reference" class="col-4 col-form-label">Order Reference</label>
-                    <div class="col d-flex flex-column gap-1">
-                        <input
-                            type="text"
-                            class="form-control w-50"
-                            id="reference"
-                            name="reference"
-                            placeholder="Type the order reference..."
-                            list="references-list"
-                            value="{{ $meta['order'] }}">
-                        <datalist id="references-list">
-                            @foreach ($data['references'] as $reference)
-                                <option value="{{ $reference->id }}">
-                                    {{ $reference->reference }}
-                                </option>
-                            @endforeach
-                        </datalist>
-                        @error ('reference') <small class="text-danger">{{ $message }}</small> @enderror
-                        <span class="form-text">Choose the user who has the ticket</span>
+                            type="number"
+                            class="form-control w-25"
+                            name="amount"
+                            id="amount"
+                            value="{{ old('amount') ?? 1 }}"
+                            min="1"
+                            max="10">
                     </div>
                 </div>
                 <div class="row mt-4">
