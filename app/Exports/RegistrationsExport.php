@@ -13,15 +13,17 @@ class RegistrationsExport implements ShouldAutoSize, FromView
     use Exportable;
 
     public Collection $registrations;
+    public string $viewName;
 
-    public function __construct(Collection $registrations)
+    public function __construct(Collection $registrations, string $viewName)
     {
         $this->registrations = $registrations;
+        $this->viewName = $viewName;
     }
 
     public function view(): View
     {
-        return view('exports.stub.registrations', [
+        return view($this->viewName, [
             'registrations' => $this->registrations
         ]);
     }

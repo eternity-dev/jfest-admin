@@ -41,5 +41,4 @@
             @endif
         </tbody>
     </table>
-    <br>
 @endforeach

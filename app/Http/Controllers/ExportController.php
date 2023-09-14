@@ -49,15 +49,28 @@ class ExportController extends Controller
     public function storeRegistrations(RegistrationsStoreRequest $request)
     {
         $data = $request->validated();
+
+        if ($data['competition'] != 'all') {
+            $registrations = Registration::with('team.members')
+                ->where(['competition_id' => $data['competition']])
+                ->whereRelation('order', 'status', '!=', OrderStatusEnum::Expired->value)
+                ->whereRelation('order', 'status', '!=', OrderStatusEnum::Pending->value)
+                ->get();
+
+            return (new RegistrationsExport($registrations, 'exports.stub.registrations'))->download(
+                sprintf('registrations-%s.xlsx', now()->toDateString()),
+                Excel::XLSX
+            );
+        }
+
         $registrations = Registration::with('team.members')
-            ->where(['competition_id' => $data['competition']])
+            ->whereIsRegistered()
             ->whereRelation('order', 'status', '!=', OrderStatusEnum::Expired->value)
             ->whereRelation('order', 'status', '!=', OrderStatusEnum::Pending->value)
-            ->whereBetween('created_at', [$data['from'], $data['to']])
             ->get();
 
-        return (new RegistrationsExport($registrations))->download(
-            sprintf('registrations-%s.xlsx', now()->toDateString()),
+        return (new RegistrationsExport($registrations, 'exports.stub.registrations-all'))->download(
+            sprintf('all-registrations-%s.xlsx', now()->getTimestamp()),
             Excel::XLSX
         );
     }
