@@ -79,8 +79,7 @@
                 <div class="d-block">
                     <span class="text-muted">Total Registrations Registered</span>
                     <div class="d-flex align-items-end gap-1">
-                        @php $ex = 5 @endphp
-                        <h1 class="m-0">5</h1>
+                        <h1 class="m-0">{{ $meta['total_registrations_sold']['all'] }}</h1>
                         <div
                             class="d-flex align-items-center gap-1 {{
                                 $meta['total_registrations_sold']['diff'] > 0 ? 'text-success' : null
