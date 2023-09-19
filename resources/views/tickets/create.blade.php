@@ -27,18 +27,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="uuid" class="col-4 col-form-label">UUID</label>
-                    <div class="col">
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="uuid"
-                            name="uuid"
-                            value="{{ str()->uuid() }}">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="user" class="col-4 col-form-label">User UUID</label>
+                    <label for="user" class="col-4 col-form-label">User Email</label>
                     <div class="col d-flex flex-column gap-1">
                         <input
                             type="text"
@@ -49,16 +38,9 @@
                             list="users-list"
                             value="{{
                                 !is_null($data['user'])
-                                    ? $data['user']->uuid
+                                    ? $data['user']->email
                                     : ''
                             }}">
-                        <datalist id="users-list">
-                            @foreach ($data['users'] as $user)
-                                <option value="{{ $user->uuid }}">
-                                    {{ $user->email }}
-                                </option>
-                            @endforeach
-                        </datalist>
                         @error ('user') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                 </div>
@@ -73,6 +55,8 @@
                             @foreach ($data['sales'] as $sale)
                                 <option value="{{ $sale->id }}">
                                     {{ $sale->name }}
+                                    -
+                                    Rp {{ number_format($sale->price, 2, ',', '.') }}
                                 </option>
                             @endforeach
                         </select>
