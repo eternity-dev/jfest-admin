@@ -4,12 +4,12 @@ namespace App\Models;
 
 use App\Enums\OrganizerRoleEnum;
 use App\Traits\Uuid;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Organizer extends Authenticatable
 {
-    use Uuid;
+    use HasApiTokens, Uuid;
 
     protected $casts = [
         'password' => 'hashed',
